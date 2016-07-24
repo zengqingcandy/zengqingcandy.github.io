@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+*{margin:0;padding:0;font-size:12px;line-height:16px;font-family:"黑体";}
+li{list-style:none;}
+h1{font-weight:normal;}
+a{color:#666666;text-decoration:none;}
+img{border:none 0;}
+/*顶部盒子*/
+.topBox{width:100%;height:50px;background:#FBFBFB; border-bottom:#33FFFF solid 1px;}
+.topBox .top{width:1192px;margin:auto; overflow:hidden;}
+/*logo盒子*/
+.topBox .top .logoBox{width:114px;height:46px;float:left;}
+.topBox .top .logoBox a{font-size:24px;line-height:46px;font-weight:700;color:#00FFFF;}
+
+/*搜索盒子*/
+.topBox .top .searchBox{padding-left:20%;float:left;}
+.searchBox .searchForm{margin-top:8px;}
+.searchBox .searchForm #searchText{width:300px;height:30px;border-radius:5px;border:#00FFFF solid 1px;font-size:14px;}
+.searchBox .searchForm .searchButton{border:none;width:64px;height:30px;border-radius:5px;background:#00FFFF;color:#FFFFFF;}
+.searchBox .searchForm .searchButton:hover{background:#33CCCC;}
+.searchBox .searchForm .searchButton a{font-size:18px;font-weight:900;color:#FFFFFF;}
+.searchBox .searchForm .searchRecom{border:#00FFFF solid 1px;width:296px;margin-left:2px;border-top:none; display:none;background:#FFFFFF;}
+.searchBox .searchForm .searchRecom div{font-size:14px;line-height:28px;border-bottom:#CCCCCC solid 1px;padding-left:15px;}
+.searchBox .searchForm .searchRecom li{padding-left:10px;font-size:14px;overflow:hidden;}
+.searchBox .searchForm .searchRecom a{display:block;width:280px;height:28px;}
+.searchBox .searchForm .searchRecom span{display:block;float:left; line-height:28px;}
+.searchBox .searchForm .searchRecom p{font-size:14px;line-height:28px;padding-left:15px;float:left;}
+.searchBox .searchForm .searchRecom li:hover{background:#00FFFF;}
+/*顶部右边*/
+.topBox .top .rightTop{float:right;}
+.topBox .top .rightTop li{float:left;}
+.topBox .top .rightTop li a{display:block;line-height:44px;font-size:12px;padding-top:4px;width:48px;text-align:center}
+.topBox .top .rightTop .topRight-a{width:108px;}
+.topBox .top .rightTop .topRight-a a{width:65px;margin-left:15px;padding-left:15px;background-image:url(images/topapp_03.png);background-repeat: no-repeat;background-position:4px 18px;}
+.topBox .top .rightTop .topRight-b a{width:81px;}
+.topBox .top .rightTop li:hover{ border-left:#00FFFF solid 2px;border-right:#00FFFF solid 2px;border-radius:3px;background:#F6F6F6;}
+
+
+</style>
+
+            <script type="text/javascript">
+                    	       window.onload=function(){
+                var search = document.getElementById('searchText');
+                var content = document.getElementById('content');
+           
+                search.onclick = function(){
+             
+                    content.style.display="block";
+                };
+				search.onblur = function(){
+             
+                    content.style.display="none";
+                };
+            };
+                    </script>
+</head>
+<body>
+<!--页面总框-->
+<div class="bodyBox">
+<!--顶部盒子开始-->
+	<div class="topBox">
+    	<div class="top">
+        	<div class="logoBox">
+            	<a href="#">天天影视</a>
+            </div>
+
+             <div class="searchBox">
+            	<form class="searchForm">
+                	<input id="searchText" type="text" placeholder="请输入搜索关键词">
+                    <button class="searchButton">
+                    	<a>搜索</a>
+                    </button>
+                    
+                    <div class="searchRecom" id="content">
+                    	<div>今日热搜</div>
+                        <ul>
+                        	<li class="searchRecomA"><a href="#">
+                            		<span>1</span>
+                            		<p>英雄联盟</p>
+                                </a>
+                            </li>
+                            <li class="searchRecomB"><a href="#">
+                            		<span>2</span>
+                            		<p>地下城与勇士</p>
+                                </a>
+                            </li>
+                            <li class="searchRecomC"><a href="#">
+                            		<span>3</span>
+                            		<p>穿越火线</p>
+                                </a>
+                            </li>
+                            <li><a href="#">
+                            		<span>4</span>
+                            		<p>QQ飞车</p>
+                                </a>
+                            </li>
+                            <li><a href="#">
+                            		<span>5</span>
+                            		<p>御龙在天</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            <ul class="rightTop">
+            	<li class="topRight-a">
+                	<a href="#">下载客户端</a>
+                </li>
+                <li class="topRight-b">
+                	<a href="#">登录\注册</a>
+                </li>
+                <li class="topRight-c">
+                	<a href="#">足迹</a>
+                </li>
+                <li class="topRight-d">
+                	<a href="#">上传</a>
+                </li>
+                <li class="topRight-e">
+                	<a href="#">收藏</a>
+                </li>
+            </ul>
+           
+        </div>
+    </div>
+<!--顶部盒子结束-->
+<style>
+.topImgBox .topImg{display:block;width:100%;height:240px;background-image:url(images/topimg.png); background-repeat:no-repeat; background-position:center;}
+</style>   
+	<div class="topImgBox" >
+    	<a class="topImg" href="#" title="欢迎来到天天影视"></a>
+    </div>
+    
+</div>
+</body>
+</html>
