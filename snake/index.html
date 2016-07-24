@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8"/>
+<head>
+    <title>Snake</title>
+</head>
+<body>
+<canvas id="canvas" width="600" height="600">
+    Your browser not support Canvas!
+</canvas>
+<br>
+<div>
+    <input type="button" class="btn btn-success" onclick="init()" value="开始"/>
+</div>
+<script type="text/javascript">
+    var c = document.getElementById('canvas');
+    var ctx = c.getContext('2d');
+    // ctx.translate(100,100);//设置画布
+    var canvasWidth;
+    var canvasHeight;//声明画布宽高
+    //snake array
+    var snakeArray//创建贪食蛇本体的数组数据，因蛇体本身移动靠X、Y坐标改变实现，故使用数组能够更方便直观！
+    //snake unit width
+    var px;
+    //fps
+    var cycle;//设置定时器间隔时间
+    //setInterval
+    var gameLoop;//声明一个变量用来接住定时器
+    //key
+    var left = 37;
+    var up = 38;
+    var right = 39;
+    var down = 40;//将控制蛇方向的按键code声明
+    //direction
+    var d;//声明蛇的方向，每次定时器触发时，根据方向判断蛇的移动
+    //food
+    var f;//食物的坐标
+    //score
+    var score;
+    //too fast become direction
+    var flagD;
+
+
+    function init(){
+        canvasWidth = c.width;
+        canvasHeight = c.height;
+        snakeArray = [];
+        px = 20;
+        cycle = 100/1000;
+        d = right;
+        f = {x:-1,y:-1};
+        score = 0;
+        flagD = true;
+
+        if(typeof gameLoop != 'undefined'){
+            clearInterval(gameLoop);
+        }
+
+        initSnake(3);
+        initFood();
+        play();
+    }
+
+    function play(){//建立开始游戏的方法
+        gameLoop = setInterval(function(){
+
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0,0,canvasWidth,canvasHeight);
+            ctx.strokeStyle = 'black';
+            ctx.strokeRect(0,0,canvasWidth,canvasHeight);
+            moveSnake();
+//paintFood();
+            paintSnake(snakeArray);
+            ctx.fillStyle = 'red';
+            paintCell(f.x,f.y);
+            var scoreStr = 'Score:' + score;
+            ctx.fillText(scoreStr,5,canvasHeight - 5);
+        },cycle*1000);
+    }
+
+    //init snake
+    function initSnake(length){
+        for(var i=length;i>0;i--){
+            snakeArray.push({x:i,y:0});
+        }
+    };
+
+    // paintSnake();
+    function paintSnake(){
+        ctx.fillStyle = 'blue';
+        for(var i=0;i<snakeArray.length;i++){
+            paintCell(snakeArray[i].x,snakeArray[i].y);
+        }
+    }
+
+    //paint cell
+    function paintCell(x,y){
+        ctx.fillRect(x*px,y*px,px-1,px-1);
+    }
+
+    // move snake
+    function moveSnake(){
+        flagD = false;
+        var p = {x:snakeArray[0].x,y:snakeArray[0].y};
+        if(d == left) p.x--;
+        else if(d == right) p.x++;
+        else if(d == up) p.y--;
+        else if(d == down) p.y++;
+//eat food
+        if(p.x == f.x && p.y == f.y){//判断蛇是否吃到食物，当食物的坐标和蛇头的坐标相同时，则判断吃到食物
+            score++;
+            initFood();
+        }else{
+            snakeArray.pop();
+        }
+        if(p.x == -1 || p.x == canvasWidth/px || p.y == -1 || p.y == canvasHeight/px
+                || checkColliction(p.x,p.y)){//判断游戏结束条件，当蛇头的坐标为四周墙壁或者自己本身的时候，则游戏结束
+            alert("游戏结束");
+            init();
+            return;
+        }
+        snakeArray.unshift(p);
+        flagD = true;
+    }
+    // check collection
+    function checkColliction(x,y){
+
+        for(var t in snakeArray){//当传入的蛇头坐标遍历蛇体坐标且有任意值相同时，则返回true，用来在move方法中判断游戏结束条件
+            if(x == snakeArray[t].x && y == snakeArray[t].y)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    //
+    function initFood(){//创建食物每次生成的功能，
+        var flag = false;
+        do{//创建循环，使每次生成的食物的坐标不会产生在蛇体上
+            f.x = Math.floor(canvasWidth/px*Math.random());
+            f.y = Math.floor(canvasHeight/px*Math.random());
+            for(var t in snakeArray){//针对蛇体做一个循环遍历，如果坐标在蛇体上，则食物坐标继续随机
+                if(f.x == snakeArray[t].x && f.y == snakeArray[t].y)
+                    flag = true;//flag为控制是否继续随机的变量
+            }
+        }while(flag);
+
+    }
+    //add listin key
+    window.addEventListener('keydown',function(e){
+        if(flagD){
+            if(e.keyCode == left && d != right) d = left;
+            else if(e.keyCode == right && d != left) d = right;
+            else if(e.keyCode == up && d!= down) d = up;
+            else if(e.keyCode == down && d != up) d = down;
+            flagD = false;
+        };
+    });
+
+</script>
+</body>
+</html>
